@@ -15,7 +15,11 @@ public interface PushTokenService extends CRUDService <PushToken>, ISend {
 
     String sendMultiple(List<Long> users, String title, String body, HashMap<String, String> data,  Priority priority);
 
-    void deleteByDeviceId(String deviceId);
+   /// void deleteByDeviceId(String deviceId);
+
+    PushToken getByPushId(Long id);
+
+    void deleteByPushId(Long id);
 
 //    public List<PushToken> getAllPushTokens() ;
 //

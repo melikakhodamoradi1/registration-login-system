@@ -7,6 +7,7 @@ import net.guides.springboot.notificationsystem.model.*;
 import net.guides.springboot.notificationsystem.repository.PushTokenRepository;
 import net.guides.springboot.notificationsystem.util.Push;
 
+import org.springframework.security.core.token.Token;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -61,16 +62,23 @@ public class PushTokenServiceImpl extends SimpleCRUDService<PushToken> implement
         return null;
     }
 
+/*
     @Override
     public void deleteByDeviceId(String deviceId) {
         pushTokenRepository.deleteByDeviceId(deviceId);
     }
+*/
 
-//    @Override
-//    public List<PushToken> getAllPushTokens() {
-//        return NotificationRepository.findByDeviceId();
-//    }
+    @Override
+    public PushToken getByPushId(Long id) {
+        Optional<PushToken> byId = pushTokenRepository.findById(id);
+        return byId.orElse(null);
+    }
 
+    @Override
+    public void deleteByPushId(Long id) {
+        pushTokenRepository.deleteById(id);
+    }
 
 ///////////////////////////////////////////////////
 

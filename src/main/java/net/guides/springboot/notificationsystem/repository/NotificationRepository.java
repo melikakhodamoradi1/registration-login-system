@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface NotificationRepository extends PagingAndSortingRepository<Notification, String> {
+public interface NotificationRepository extends PagingAndSortingRepository<Notification, Long> {
 
 //TODO:Please change findById to findByUserIds
 

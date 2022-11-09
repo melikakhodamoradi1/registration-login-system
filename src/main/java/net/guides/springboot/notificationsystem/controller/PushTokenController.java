@@ -70,8 +70,8 @@ public class PushTokenController {
      */
     @GetMapping("/{push-id}")
     @PreAuthorize(value = "hasAnyAuthority('notification.push.token.get')")
-    public GetPushTokenDto get(@PathVariable("push-id") String id) {
-        return mapper.pushTokenToGetPushTokenDto(pushTokenService.getById(id));
+    public GetPushTokenDto get(@PathVariable("push-id") Long id) {
+        return mapper.pushTokenToGetPushTokenDto(pushTokenService.getByPushId(id));
     }
 
     /**
@@ -82,8 +82,8 @@ public class PushTokenController {
     @DeleteMapping("/{push-id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize(value = "hasAnyAuthority('notification.push.token.delete')")
-    public void delete(@PathVariable("push-id") String id) {
-        pushTokenService.deleteById(id);
+    public void delete (@PathVariable("push-id") Long id) {
+        pushTokenService.deleteByPushId(id);
     }
 
 }
