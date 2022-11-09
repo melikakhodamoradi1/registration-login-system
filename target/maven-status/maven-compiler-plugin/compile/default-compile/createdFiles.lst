@@ -4,13 +4,13 @@ net\guides\springboot\notificationsystem\security\CustomUserDetailsService.class
 net\guides\springboot\notificationsystem\config\SpringSecurity.class
 net\guides\springboot\notificationsystem\service\NotificationServiceImpl.class
 net\guides\springboot\notificationsystem\adapter\mapper\NotificationMapperImpl.class
+net\guides\springboot\notificationsystem\model\Status.class
 net\guides\springboot\notificationsystem\dto\UserDto.class
 net\guides\springboot\notificationsystem\service\Utils.class
 net\guides\springboot\notificationsystem\entity\Role.class
 net\guides\springboot\notificationsystem\service\UserService.class
 net\guides\springboot\notificationsystem\RegistrationLoginSystemApplication.class
 net\guides\springboot\notificationsystem\util\UserDetails.class
-net\guides\springboot\notificationsystem\model\Notification$NotificationBuilder.class
 net\guides\springboot\notificationsystem\util\UserBasedUserDetails.class
 net\guides\springboot\notificationsystem\model\Notification.class
 net\guides\springboot\notificationsystem\model\Priority.class
@@ -35,6 +35,7 @@ net\guides\springboot\notificationsystem\controller\PushTokenController.class
 net\guides\springboot\notificationsystem\service\PushTokenServiceImpl.class
 net\guides\springboot\notificationsystem\dto\PushTokenDto.class
 net\guides\springboot\notificationsystem\entity\User.class
+net\guides\springboot\notificationsystem\controller\NotificationController.class
 net\guides\springboot\notificationsystem\repository\RoleRepository.class
 net\guides\springboot\notificationsystem\repository\UserRepository.class
 net\guides\springboot\notificationsystem\util\Push.class

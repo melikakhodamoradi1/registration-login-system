@@ -1,33 +1,34 @@
 package net.guides.springboot.notificationsystem.controller;
 
 
-import lombok.RequiredArgsConstructor;
-
-
 import net.guides.springboot.notificationsystem.adapter.mapper.NotificationMapper;
 import net.guides.springboot.notificationsystem.model.Notification;
 import net.guides.springboot.notificationsystem.service.NotificationFactory;
 import net.guides.springboot.notificationsystem.service.NotificationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
 @RestController
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @RequestMapping("/notifications")
 public class NotificationController {
 
-    private final NotificationFactory notificationFactory;
-
     private final NotificationMapper mapper;
-
 
     private final NotificationService notificationService;
 
+    private final NotificationFactory notificationFactory;
+
+    public NotificationController(NotificationService notificationService, NotificationFactory notificationFactory) {
+        this.notificationFactory = notificationFactory;
+        this.mapper = NotificationMapper.INSTANCE;
+        this.notificationService = notificationService;
+    }
 
 
     /**
@@ -38,8 +39,9 @@ public class NotificationController {
     @PostMapping("/send")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize(value = "hasAnyAuthority('notification.send')")
-    public void send(Notification notification) {
+    public void save(@RequestBody @Valid Notification notification) {
         var channels = mapper.setChannels(notification.getTypes());
+        notificationService.save( notification );
         notificationFactory.send(channels, notification);
     }
     /**

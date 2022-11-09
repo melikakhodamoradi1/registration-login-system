@@ -4,6 +4,7 @@ D:\ASSIGNMENT\registration-login-system\src\main\java\net\guides\springboot\noti
 D:\ASSIGNMENT\registration-login-system\src\main\java\net\guides\springboot\notificationsystem\adapter\mapper\PushTokenAdapterMapper.java
 D:\ASSIGNMENT\registration-login-system\src\main\java\net\guides\springboot\notificationsystem\config\Swagger2Config.java
 D:\ASSIGNMENT\registration-login-system\src\main\java\net\guides\springboot\notificationsystem\dto\CreatePushTokenDto.java
+D:\ASSIGNMENT\registration-login-system\src\main\java\net\guides\springboot\notificationsystem\model\Status.java
 D:\ASSIGNMENT\registration-login-system\src\main\java\net\guides\springboot\notificationsystem\service\PushTokenService.java
 D:\ASSIGNMENT\registration-login-system\src\main\java\net\guides\springboot\notificationsystem\controller\PushTokenController.java
 D:\ASSIGNMENT\registration-login-system\src\main\java\net\guides\springboot\notificationsystem\dto\PushMessageDto.java

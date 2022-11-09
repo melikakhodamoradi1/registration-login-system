@@ -1,25 +1,24 @@
 package net.guides.springboot.notificationsystem.service;
 
-import com.vasl.ario.crudutil.service.SimpleCRUDService;
 import net.guides.springboot.notificationsystem.model.Notification;
 
-import net.guides.springboot.notificationsystem.model.PushToken;
 import net.guides.springboot.notificationsystem.repository.NotificationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
+@Service
 public class NotificationServiceImpl implements NotificationService  {
+
+    private final NotificationRepository notificationRepository;
 
     public NotificationServiceImpl(NotificationRepository notificationRepository) {
         this.notificationRepository = notificationRepository;
     }
 
-    @Autowired
-    private NotificationRepository notificationRepository;
+
 
 
     @Override
@@ -39,5 +38,25 @@ public class NotificationServiceImpl implements NotificationService  {
     public List<Notification> getAllNotifications() {
         return notificationRepository.findAll();
     }
+
+    @Override
+    public void save(Notification notification) {
+        notificationRepository.save(notification);
+    }
+  //  @Scheduled(fixedRate =15000 )
+//    private void sendNotifications() {
+//        System.out.println("Sending notifications to all subscribers");
+//
+//        var json = """
+//        {
+//          "title": "Server says hello!",
+//          "body": "It is now: %s"
+//        }
+//        """;
+//
+//        User.forEach(user -> {
+//            send(user, String.format(json, LocalTime.now()));
+//        });
+//    }
 
 }
