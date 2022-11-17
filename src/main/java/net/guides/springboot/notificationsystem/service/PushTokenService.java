@@ -1,7 +1,6 @@
 package net.guides.springboot.notificationsystem.service;
 
 import com.vasl.ario.crudutil.service.CRUDService;
-import net.guides.springboot.notificationsystem.model.Notification;
 import net.guides.springboot.notificationsystem.model.Priority;
 import net.guides.springboot.notificationsystem.model.PushToken;
 import net.guides.springboot.notificationsystem.model.TokenType;

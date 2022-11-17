@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "notifications")
 @Entity
-public class Notification  {
+public class Notif {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +27,7 @@ public class Notification  {
     private List<Long> IDs;
     @Transient
     private Set<String> visitedSet;
-    private String toId;
+    private Long toId;
     private String mobile;
     private String template;
     @Transient
@@ -35,6 +35,7 @@ public class Notification  {
     @Transient
     private List<NotificationType> types;
     private Status state;
+    private String senderId;
 
 }
 

@@ -1,7 +1,7 @@
 package net.guides.springboot.notificationsystem.service;
 
 import lombok.RequiredArgsConstructor;
-import net.guides.springboot.notificationsystem.model.Notification;
+import net.guides.springboot.notificationsystem.model.Notif;
 import net.guides.springboot.notificationsystem.model.NotificationChannel;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class NotificationFactory  {
     private final List<ISend> sendersList;
 
-    public void send(List<NotificationChannel> notificationChannels , Notification notification) {
+    public void send(List<NotificationChannel> notificationChannels , Notif notif) {
         var senders = new ArrayList<ISend>();
         notificationChannels.forEach(notificationChannel ->
                 senders.add(sendersList
@@ -22,7 +22,7 @@ public class NotificationFactory  {
                         .findFirst()
                         .orElseThrow())
         );
-        senders.forEach(sender -> sender.send(notification));
+        senders.forEach(sender -> sender.send(notif));
     }
 
 }

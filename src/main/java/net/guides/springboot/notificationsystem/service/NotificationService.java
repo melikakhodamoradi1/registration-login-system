@@ -1,19 +1,17 @@
 package net.guides.springboot.notificationsystem.service;
 
 
-import net.guides.springboot.notificationsystem.model.Notification;
-import net.guides.springboot.notificationsystem.model.NotificationChannel;
-import net.guides.springboot.notificationsystem.model.TokenType;
+import net.guides.springboot.notificationsystem.model.Notif;
 
 import java.util.List;
 
 public interface NotificationService {
 
-    Notification getByUserId(Long userId) ;
+    Notif getByUserId(Long userId) ;
 
-    List<Notification> getAllNotifications() ;
+    List<Notif> getAllNotifications() ;
 
 //    void save(String deviceId, String token, TokenType type, Long userId);
 
-    void save(Notification notification);
+    void save(Notif notif);
 }

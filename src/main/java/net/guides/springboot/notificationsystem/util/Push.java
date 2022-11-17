@@ -77,8 +77,8 @@ public class Push {
         try {
             // See documentation on defining a message payload.
             Message.Builder builder = Message.builder();
-            for (int i = 0; i < tokens.size(); i++) {
-                builder = builder.setToken(tokens.get(i));
+            for (String token : tokens) {
+                builder = builder.setToken(token);
             }
             Message message = builder.setNotification(Notification.builder()
                             .setTitle(title)

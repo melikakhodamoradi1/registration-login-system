@@ -1,5 +1,5 @@
 package net.guides.springboot.notificationsystem.repository;//package net.guides.springboot.notificationsystem.repository;
-import net.guides.springboot.notificationsystem.model.Notification;
+import net.guides.springboot.notificationsystem.model.Notif;
 import org.springframework.stereotype.Repository;
 
 
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface NotificationRepository extends PagingAndSortingRepository<Notification, Long> {
+public interface NotificationRepository extends PagingAndSortingRepository<Notif, Long> {
 
 //TODO:Please change findById to findByUserIds
 
-    Optional<Notification> findById(Long id);
-    List<Notification> findAll();
+    Optional<Notif> findById(Long id);
+    List<Notif> findAll();
 
 //    Notification save(Notification notification);
 //    Optional<Notification> deleteById(Long userId);

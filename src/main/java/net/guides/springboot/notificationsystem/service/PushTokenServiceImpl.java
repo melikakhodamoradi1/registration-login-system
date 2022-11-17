@@ -7,7 +7,6 @@ import net.guides.springboot.notificationsystem.model.*;
 import net.guides.springboot.notificationsystem.repository.PushTokenRepository;
 import net.guides.springboot.notificationsystem.util.Push;
 
-import org.springframework.security.core.token.Token;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -83,10 +82,10 @@ public class PushTokenServiceImpl extends SimpleCRUDService<PushToken> implement
 ///////////////////////////////////////////////////
 
     @Override
-    public void send( Notification notification) {
-        var pushTokens = pushTokenRepository.findAllByUserId(notification.getIDs().get(0));
+    public void send( Notif notif) {
+        var pushTokens = pushTokenRepository.findAllByUserId(notif.getIDs().get(0));
         if (!pushTokens.isEmpty())
-            pushTokens.forEach(pushToken -> push.sendPush(pushToken.getToken(), notification.getTitle(), notification.getMessage(), getMetaData(notification.getMetaData()), null, null));
+            pushTokens.forEach(pushToken -> push.sendPush(pushToken.getToken(), notif.getTitle(), notif.getMessage(), getMetaData(notif.getMetaData()), null, null));
     }
 
     private HashMap<String, String> getMetaData(Map<String, Object> metaData) {
