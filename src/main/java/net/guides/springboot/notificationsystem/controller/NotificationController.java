@@ -2,10 +2,9 @@ package net.guides.springboot.notificationsystem.controller;
 
 
 import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.internal.FirebaseService;
 import com.google.firebase.messaging.FirebaseMessagingException;
-import lombok.RequiredArgsConstructor;
 import net.guides.springboot.notificationsystem.adapter.mapper.NotificationMapper;
+import net.guides.springboot.notificationsystem.service.model.EmailModel;
 import net.guides.springboot.notificationsystem.model.Notif;
 import net.guides.springboot.notificationsystem.service.FireBaseMessagingService;
 import net.guides.springboot.notificationsystem.service.NotificationFactory;
@@ -70,6 +69,12 @@ public class NotificationController {
     @ResponseBody
     public String sendNotification(@RequestBody Notif note) throws FirebaseMessagingException, IOException, FirebaseAuthException {
         return fireBaseMessagingService.sendNotification(note, null);
+    }
+
+    @PostMapping("/send-email")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void sendEmail(@RequestBody EmailModel emailModel) {
+        notificationService.sendEmail(emailModel);
     }
 
 }

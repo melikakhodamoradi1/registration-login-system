@@ -17,9 +17,19 @@
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="snapshots" />
+      <option name="name" value="libs-snapshot" />
+      <option name="url" value="https://registry.vaslapp.com/artifactory/libs-snapshot" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="maven" />
       <option name="name" value="maven" />
       <option name="url" value="https://archive.vaslapp.com/repository/maven-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="libs-release" />
+      <option name="url" value="https://registry.vaslapp.com/artifactory/libs-release" />
     </remote-repository>
   </component>
 </project>
