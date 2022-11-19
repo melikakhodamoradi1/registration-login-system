@@ -80,6 +80,7 @@ public class NotificationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void sendEmail(@RequestBody EmailModel emailModel) {
         notificationService.sendEmail(emailModel);
+        System.out.println("Done");
     }
 
     @PostMapping("/token")
