@@ -36,10 +36,10 @@ public class NotificationController {
     public NotificationController(NotificationService notificationService,
                                   NotificationFactory notificationFactory,
                                   PushNotificationService pushNotificationService) {
+        this.notificationService = notificationService;
         this.notificationFactory = notificationFactory;
         this.mapper = NotificationMapper.INSTANCE;
-        this.notificationService = notificationService;
-//        this.fireBaseMessagingService = fireBaseMessagingService;
+//      this.fireBaseMessagingService = fireBaseMessagingService;
         this.pushNotificationService = pushNotificationService;
 
     }
@@ -76,17 +76,6 @@ public class NotificationController {
         return fireBaseMessagingService.sendNotification(note, null);
     }*/
 
-    @PostMapping("/send-email")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void sendEmail(@RequestBody EmailModel emailModel) {
-        notificationService.sendEmail(emailModel);
-    }
 
-    @PostMapping("/token")
-    public ResponseEntity sendTokenNotification(@RequestBody PushNotificationRequest request) {
-        pushNotificationService.sendPushNotificationToToken(request);
-        System.out.println("Done");
-        return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."), HttpStatus.OK);
-    }
 
 }

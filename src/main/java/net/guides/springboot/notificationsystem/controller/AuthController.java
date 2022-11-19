@@ -63,6 +63,8 @@ public class AuthController {
     public String users(Model model){
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
+        // user get by id
+
         return "users";
     }
     // handler method to handle login request
@@ -70,4 +72,6 @@ public class AuthController {
     public String login(){
         return "login";
     }
+
+
 }

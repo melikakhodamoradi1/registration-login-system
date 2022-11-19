@@ -12,9 +12,9 @@ public interface NotificationService {
 
     List<Notif> getAllNotifications() ;
 
-//    void save(String deviceId, String token, TokenType type, Long userId);
+//  void save(String deviceId, String token, TokenType type, Long userId);
 
     void save(Notif notif);
 
-    void sendEmail(EmailModel emailModel);
+
 }
