@@ -1,3 +1,4 @@
+/*
 package net.guides.springboot.notificationsystem.config;
 
 import com.google.auth.oauth2.GoogleCredentials;
@@ -30,3 +31,4 @@ public class FcmConfiguration {
         return FirebaseMessaging.getInstance(app);
     }
 }
+*/

@@ -1,5 +1,6 @@
 package net.guides.springboot.notificationsystem.service;
 
+import net.guides.springboot.notificationsystem.entity.User;
 import net.guides.springboot.notificationsystem.model.Notif;
 
 import net.guides.springboot.notificationsystem.repository.NotificationRepository;
@@ -64,7 +65,7 @@ public class NotificationServiceImpl implements NotificationService  {
     @Override
     public void sendEmail(EmailModel emailModel) {
 
-
+//        User user = userRepository.findById(Utils.getUserIdFromContext());
         MimeMessagePreparator mailMessage = mimeMessage -> {
 
             MimeMessageHelper message = new MimeMessageHelper(
@@ -75,7 +76,10 @@ public class NotificationServiceImpl implements NotificationService  {
                 message.addTo(emailModel.getRecipient());
 
 
-                message.setReplyTo(sender);
+
+//                message.setReplyTo(sender);
+//                String subject = emailModel.getSubject().concat("new message from " + user.getName());
+//                message.setSubject(subject);
                 message.setSubject(emailModel.getSubject());
                 message.setText(emailModel.getMsgBody());
 

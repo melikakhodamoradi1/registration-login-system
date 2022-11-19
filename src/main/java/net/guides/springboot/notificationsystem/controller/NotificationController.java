@@ -1,20 +1,20 @@
 package net.guides.springboot.notificationsystem.controller;
 
 
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.messaging.FirebaseMessagingException;
 import net.guides.springboot.notificationsystem.adapter.mapper.NotificationMapper;
-import net.guides.springboot.notificationsystem.service.model.EmailModel;
+import net.guides.springboot.notificationsystem.dto.PushNotificationRequest;
+import net.guides.springboot.notificationsystem.dto.PushNotificationResponse;
 import net.guides.springboot.notificationsystem.model.Notif;
-import net.guides.springboot.notificationsystem.service.FireBaseMessagingService;
 import net.guides.springboot.notificationsystem.service.NotificationFactory;
 import net.guides.springboot.notificationsystem.service.NotificationService;
+import net.guides.springboot.notificationsystem.service.PushNotificationService;
+import net.guides.springboot.notificationsystem.service.model.EmailModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 
 
@@ -29,13 +29,18 @@ public class NotificationController {
 
     private final NotificationFactory notificationFactory;
 
-    private final FireBaseMessagingService fireBaseMessagingService;
+    private final PushNotificationService pushNotificationService;
 
-    public NotificationController(NotificationService notificationService, NotificationFactory notificationFactory , FireBaseMessagingService fireBaseMessagingService) {
+//    private final FireBaseMessagingService fireBaseMessagingService;
+
+    public NotificationController(NotificationService notificationService,
+                                  NotificationFactory notificationFactory,
+                                  PushNotificationService pushNotificationService) {
         this.notificationFactory = notificationFactory;
         this.mapper = NotificationMapper.INSTANCE;
         this.notificationService = notificationService;
-        this.fireBaseMessagingService = fireBaseMessagingService;
+//        this.fireBaseMessagingService = fireBaseMessagingService;
+        this.pushNotificationService = pushNotificationService;
 
     }
 
@@ -65,16 +70,23 @@ public class NotificationController {
         return list;
     }
 
-    @PostMapping("/send-notification")
+    /*@PostMapping("/send-notification")
     @ResponseBody
     public String sendNotification(@RequestBody Notif note) throws FirebaseMessagingException, IOException, FirebaseAuthException {
         return fireBaseMessagingService.sendNotification(note, null);
-    }
+    }*/
 
     @PostMapping("/send-email")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void sendEmail(@RequestBody EmailModel emailModel) {
         notificationService.sendEmail(emailModel);
+    }
+
+    @PostMapping("/token")
+    public ResponseEntity sendTokenNotification(@RequestBody PushNotificationRequest request) {
+        pushNotificationService.sendPushNotificationToToken(request);
+        System.out.println("Done");
+        return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."), HttpStatus.OK);
     }
 
 }
