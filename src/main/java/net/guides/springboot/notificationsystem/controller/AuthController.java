@@ -1,13 +1,18 @@
 package net.guides.springboot.notificationsystem.controller;
+import net.guides.springboot.notificationsystem.dto.PushNotificationRequest;
+import net.guides.springboot.notificationsystem.dto.PushNotificationResponse;
 import net.guides.springboot.notificationsystem.dto.UserDto;
 import net.guides.springboot.notificationsystem.entity.User;
+import net.guides.springboot.notificationsystem.service.NotificationService;
+import net.guides.springboot.notificationsystem.service.PushNotificationService;
 import net.guides.springboot.notificationsystem.service.UserService;
+import net.guides.springboot.notificationsystem.service.model.EmailModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,9 +21,14 @@ import java.util.List;
 public class AuthController {
 
     private final UserService userService;
+    private final PushNotificationService pushNotificationService;
+    private final NotificationService notificationService;
 
-    public AuthController(UserService userService) {
+
+    public AuthController(UserService userService, PushNotificationService pushNotificationService, NotificationService notificationService) {
         this.userService = userService;
+        this.pushNotificationService = pushNotificationService;
+        this.notificationService = notificationService;
     }
 
 
@@ -71,6 +81,20 @@ public class AuthController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+
+    @PostMapping("/send-email")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void sendEmail(@RequestBody EmailModel emailModel) {
+        notificationService.sendEmail(emailModel);
+    }
+
+    @PostMapping("/token")
+    public ResponseEntity sendTokenNotification(@RequestBody PushNotificationRequest request) {
+        pushNotificationService.sendPushNotificationToToken(request);
+        System.out.println("Done");
+        return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."), HttpStatus.OK);
     }
 
 

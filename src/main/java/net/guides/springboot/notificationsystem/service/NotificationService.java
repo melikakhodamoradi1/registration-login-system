@@ -16,5 +16,7 @@ public interface NotificationService {
 
     void save(Notif notif);
 
+    void sendEmail(EmailModel emailModel);
+
 
 }

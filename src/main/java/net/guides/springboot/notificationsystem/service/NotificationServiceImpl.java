@@ -66,7 +66,45 @@ public class NotificationServiceImpl implements NotificationService  {
         notificationRepository.save(notif);
     }
 
+    public void sendEmail(EmailModel emailModel) {
+        /*
+         * if we send userId send email for this user.
+         * else send email for everyone.
+         * */
 
+        User professor = userRepository.findById(Utils.getUserIdFromContext()).get();
+        List<User> users = userRepository.findAll(professor.getEmail());
+        String[] userEmails = new String[users.size()];
+        MimeMessagePreparator mailMessage = mimeMessage -> {
+
+            MimeMessageHelper message = new MimeMessageHelper(
+                    mimeMessage, true);
+            try {
+                for (int i = 0; i < users.size(); i++) {
+                    userEmails[i] = users.get(i).getEmail();
+                }
+                message.setFrom(sender, "مرکز آموزش های دانشگاه شهید بهشتی"); // Here comes your name
+
+//              message.addTo(emailModel.getRecipient());
+
+
+                message.setCc(userEmails);
+
+
+//              message.setReplyTo(sender);
+                String subject = emailModel.getSubject().concat("new message from " + professor.getName());
+                message.setSubject(subject);
+//              message.setSubject(emailModel.getSubject());
+                message.setText(emailModel.getMsgBody());
+
+            } catch (Exception e) {
+                throw new MailSendException(emailModel.getRecipient(), e);
+            }
+        };
+
+        javaMailSender.send(mailMessage);
+
+    }
 
 
 
