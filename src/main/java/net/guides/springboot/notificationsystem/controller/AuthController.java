@@ -84,10 +84,10 @@ public class AuthController {
     }
 
 
-    @PostMapping("/send-email")
+    @PostMapping("/send-email/{grade}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void sendEmail(@RequestBody EmailModel emailModel) {
-        notificationService.sendEmail(emailModel);
+    public void sendEmail(@RequestBody EmailModel emailModel , @PathVariable String grade) {
+        notificationService.sendEmail(emailModel , grade);
     }
 
     @PostMapping("/token")

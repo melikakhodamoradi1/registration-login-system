@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.guides.springboot.notificationsystem.service.model.Grade;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -25,4 +26,6 @@ public class UserDto {
     private String email;
     @NotEmpty(message = "Password should be empty")
     private String password;
+    private Grade grade;
+    /**/
 }

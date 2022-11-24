@@ -100,6 +100,9 @@
             <p th:errors = "*{password}" class="text-danger"
                th:if="${#fields.hasErrors('password')}"></p>
           </div>
+          <!--
+          create a combo box for select maghtae;
+          -->
           <div class="form-group">
             <button class="btn btn-primary" type="submit">Register</button>
             <span>Already registered? <a th:href="@{/login}">Login here</a></span>

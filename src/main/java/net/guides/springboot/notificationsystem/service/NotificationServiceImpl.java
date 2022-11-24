@@ -66,14 +66,15 @@ public class NotificationServiceImpl implements NotificationService  {
         notificationRepository.save(notif);
     }
 
-    public void sendEmail(EmailModel emailModel) {
+    public void sendEmail(EmailModel emailModel , String grade) {
         /*
          * if we send userId send email for this user.
          * else send email for everyone.
          * */
 
         User professor = userRepository.findById(Utils.getUserIdFromContext()).get();
-        List<User> users = userRepository.findAll(professor.getEmail());
+//        List<User> users = userRepository.findAll(professor.getEmail());
+        List<User> users = userRepository.findAllByGrade(grade);
         String[] userEmails = new String[users.size()];
         MimeMessagePreparator mailMessage = mimeMessage -> {
 

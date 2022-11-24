@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.guides.springboot.notificationsystem.service.model.Grade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -36,5 +37,7 @@ public class User {
     )
 
     private List <Role> roles = new ArrayList<>();
+    @Enumerated(value = EnumType.STRING)
+    private Grade grade;
 
 }
