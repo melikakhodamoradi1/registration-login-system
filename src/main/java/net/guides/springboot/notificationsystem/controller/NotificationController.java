@@ -70,6 +70,12 @@ public class NotificationController {
         return list;
     }
 
+    @PostMapping("/send-email/{grade}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void sendEmail(@RequestBody EmailModel emailModel , @PathVariable String grade) {
+        notificationService.sendEmail(emailModel , grade);
+    }
+
     /*@PostMapping("/send-notification")
     @ResponseBody
     public String sendNotification(@RequestBody Notif note) throws FirebaseMessagingException, IOException, FirebaseAuthException {

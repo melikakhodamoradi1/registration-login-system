@@ -6,6 +6,7 @@ import net.guides.springboot.notificationsystem.model.Notif;
 import net.guides.springboot.notificationsystem.repository.NotificationRepository;
 import net.guides.springboot.notificationsystem.repository.UserRepository;
 import net.guides.springboot.notificationsystem.service.model.EmailModel;
+import net.guides.springboot.notificationsystem.service.model.Grade;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -72,9 +73,10 @@ public class NotificationServiceImpl implements NotificationService  {
          * else send email for everyone.
          * */
 
-        User professor = userRepository.findById(Utils.getUserIdFromContext()).get();
+        User professor = userRepository.findByEmail(Utils.getUserEmail());
 //        List<User> users = userRepository.findAll(professor.getEmail());
-        List<User> users = userRepository.findAllByGrade(grade);
+//        User professor = userRepository.findByGrade(Grade.PROFESSOR);
+        List<User> users = userRepository.findAllByGrade(Grade.valueOf(grade));
         String[] userEmails = new String[users.size()];
         MimeMessagePreparator mailMessage = mimeMessage -> {
 

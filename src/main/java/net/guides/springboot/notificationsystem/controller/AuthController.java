@@ -84,11 +84,7 @@ public class AuthController {
     }
 
 
-    @PostMapping("/send-email/{grade}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void sendEmail(@RequestBody EmailModel emailModel , @PathVariable String grade) {
-        notificationService.sendEmail(emailModel , grade);
-    }
+
 
     @PostMapping("/token")
     public ResponseEntity sendTokenNotification(@RequestBody PushNotificationRequest request) {

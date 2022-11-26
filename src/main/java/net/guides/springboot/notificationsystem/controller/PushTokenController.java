@@ -39,7 +39,7 @@ public class PushTokenController {
                 pushTokenDto.getDeviceId(),
                 pushTokenDto.getToken(),
                 pushTokenDto.getType(),
-                Utils.getUserIdFromContext());
+                1L);
     }
 
     /**
