@@ -2,10 +2,12 @@ package net.guides.springboot.notificationsystem.controller;
 import net.guides.springboot.notificationsystem.dto.PushNotificationRequest;
 import net.guides.springboot.notificationsystem.dto.PushNotificationResponse;
 import net.guides.springboot.notificationsystem.dto.UserDto;
+import net.guides.springboot.notificationsystem.entity.Role;
 import net.guides.springboot.notificationsystem.entity.User;
 import net.guides.springboot.notificationsystem.service.NotificationService;
 import net.guides.springboot.notificationsystem.service.PushNotificationService;
 import net.guides.springboot.notificationsystem.service.UserService;
+import net.guides.springboot.notificationsystem.service.Utils;
 import net.guides.springboot.notificationsystem.service.model.EmailModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.testng.collections.CollectionUtils;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AuthController {
@@ -91,6 +96,20 @@ public class AuthController {
         pushNotificationService.sendPushNotificationToToken(request);
         System.out.println("Done");
         return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."), HttpStatus.OK);
+    }
+
+    @RequestMapping("/header")
+    public String specifyUser() {
+        String userEmail = Utils.getUserEmail();
+        User user = userService.findUserByEmail(userEmail);
+        List<Role> roles = user.getRoles().stream().filter(
+                role -> role.getName().endsWith("ADMIN")
+        ).collect(Collectors.toList());
+        if (roles.isEmpty()) {
+            return "redirect:/user/userWorkbench";
+        }
+        else
+            return "redirect:/professor/professorWorkbench";
     }
 
 

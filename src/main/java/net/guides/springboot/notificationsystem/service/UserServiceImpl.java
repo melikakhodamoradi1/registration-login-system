@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setGrade(userDto.getGrade());
 
+        // each new user is saved in DB as a USER_ROLE
         Role role = roleRepository.findByName("ROLE_USER");
         if (role == null) {
             role = checkRoleExist();

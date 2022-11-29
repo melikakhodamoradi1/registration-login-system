@@ -39,13 +39,15 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register/**").permitAll()
                 .antMatchers("/index").permitAll()
+                // Kasike USER bashe dastresi dare be safe users ke in nbyd entori bashe!
+                // byd ADMIN dstresi dashte bashe fght
                 .antMatchers("/users").hasRole("ADMIN")
                 .and()
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
+                                .defaultSuccessUrl("/header")
                                 .permitAll()
                 ).logout(
                         logout -> logout
