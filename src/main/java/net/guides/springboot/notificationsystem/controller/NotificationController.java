@@ -70,9 +70,9 @@ public class NotificationController {
         return list;
     }
 
-    @PostMapping("/send-email/{grade}")
+    @PostMapping("/send-email")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void sendEmail(@RequestBody EmailModel emailModel , @PathVariable String grade) {
+    public void sendEmail(@ModelAttribute("userDTO") EmailModel emailModel , @RequestParam("grade") String grade) {
         notificationService.sendEmail(emailModel , grade);
     }
 

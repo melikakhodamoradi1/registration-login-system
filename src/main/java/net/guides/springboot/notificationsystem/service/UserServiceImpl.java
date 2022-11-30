@@ -4,6 +4,7 @@ import net.guides.springboot.notificationsystem.dto.UserDto;
 import net.guides.springboot.notificationsystem.entity.User;
 import net.guides.springboot.notificationsystem.repository.RoleRepository;
 import net.guides.springboot.notificationsystem.repository.UserRepository;
+import net.guides.springboot.notificationsystem.service.model.Grade;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDto.getEmail());
         // encrypt the password using spring security
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setGrade(userDto.getGrade());
+        user.setGrade(Grade.valueOf(userDto.getGrade()));
 
         // each new user is saved in DB as a USER_ROLE
         Role role = roleRepository.findByName("ROLE_USER");
@@ -68,6 +69,7 @@ public class UserServiceImpl implements UserService {
         userDto.setFirstName(str[0]);
         userDto.setLastName(str[1]);
         userDto.setEmail(user.getEmail());
+        userDto.setGrade(user.getGrade().getValue());
         return userDto;
     }
 

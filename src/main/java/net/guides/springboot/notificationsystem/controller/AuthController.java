@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.testng.collections.CollectionUtils;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
@@ -99,17 +100,21 @@ public class AuthController {
     }
 
     @RequestMapping("/header")
-    public String specifyUser() {
+    public String specifyUser(HttpSession session) {
         String userEmail = Utils.getUserEmail();
         User user = userService.findUserByEmail(userEmail);
         List<Role> roles = user.getRoles().stream().filter(
                 role -> role.getName().endsWith("ADMIN")
         ).collect(Collectors.toList());
         if (roles.isEmpty()) {
+            session.setAttribute("name",user.getName());
             return "redirect:/user/userWorkbench";
         }
-        else
-            return "redirect:/professor/professorWorkbench";
+        else {
+            session.setAttribute("name",user.getName());
+            return "redirect:/professorWorkbench";
+        }
+
     }
 
 
