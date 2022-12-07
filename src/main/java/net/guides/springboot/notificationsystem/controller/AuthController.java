@@ -62,7 +62,7 @@ public class AuthController {
 
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
-                    "There is already an account registered with the same email");
+                    "حساب کاربری با این اییل از قبل وجود دارد");
         }
 
         if(result.hasErrors()){

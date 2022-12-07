@@ -10867,21 +10867,28 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("/images/beheshti.jpg");
+  background-image: url("/images/beheshti.jpg");
   background-position: center;
-  background-size: cover;
+  background-size: 70% auto;
+  background-repeat: no-repeat;
+  background-color: #2e59d9;
+
 }
 
 .bg-register-image {
-  background: url("/images/beheshti.jpg");
+  background-image: url("/images/beheshti.jpg");
   background-position: center;
-  background-size: cover;
+  background-size: 70% auto;
+  background-repeat: no-repeat;
+  background-color: #2e59d9;
 }
 
 .bg-password-image {
-  background: url("/images/beheshti.jpg");
+  background-image: url("/images/beheshti.jpg");
   background-position: center;
-  background-size: cover;
+  background-size: 70% auto;
+  background-repeat: no-repeat;
+  background-color: #2e59d9;
 }
 
 form.user .custom-checkbox.small label {

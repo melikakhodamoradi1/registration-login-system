@@ -1,18 +1,11 @@
 package net.guides.springboot.notificationsystem;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
 
 
 @ComponentScan("net")
@@ -21,8 +14,8 @@ import java.util.Objects;
 public class RegistrationLoginSystemApplication {
 
     public static void main(String[] args) throws IOException {
-        ClassLoader classLoader = RegistrationLoginSystemApplication.class.getClassLoader();
-        File file = new File(Objects.requireNonNull(classLoader.getResource("serviceAccountKey.json")).getFile());
+      /*  ClassPathResource classPathResource = new ClassPathResource("serviceAccountKey.json");
+        File file = classPathResource.getFile();
         FileInputStream serviceAccount =
                 new FileInputStream(file.getAbsolutePath());
 
@@ -32,7 +25,7 @@ public class RegistrationLoginSystemApplication {
                 .setDatabaseUrl("https://melika-project-default-rtdb.firebaseio.com")
                 .build();
 
-        FirebaseApp.initializeApp(options);
+        FirebaseApp.initializeApp(options);*/
 
 
         SpringApplication.run(RegistrationLoginSystemApplication.class, args);
