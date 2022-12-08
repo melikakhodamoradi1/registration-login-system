@@ -2,6 +2,7 @@ package net.guides.springboot.notificationsystem.adapter.mapper;
 
 import net.guides.springboot.notificationsystem.model.NotificationChannel;
 import net.guides.springboot.notificationsystem.model.NotificationType;
+import net.guides.springboot.notificationsystem.service.model.Grade;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;

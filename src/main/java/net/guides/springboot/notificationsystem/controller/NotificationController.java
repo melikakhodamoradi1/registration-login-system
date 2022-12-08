@@ -72,7 +72,7 @@ public class NotificationController {
 
     @PostMapping("/send-email")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void sendEmail(@ModelAttribute("userDTO") EmailModel emailModel , @RequestParam("grade") String grade) {
+    public void sendEmail(@ModelAttribute("userDTO") EmailModel emailModel , @RequestParam("grade") List<String> grade) {
         notificationService.sendEmail(emailModel , grade);
     }
 

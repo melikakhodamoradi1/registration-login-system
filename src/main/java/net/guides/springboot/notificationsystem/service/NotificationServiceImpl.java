@@ -14,7 +14,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,7 +70,7 @@ public class NotificationServiceImpl implements NotificationService  {
         notificationRepository.save(notif);
     }
 
-    public void sendEmail(EmailModel emailModel , String grade) {
+    public void sendEmail(EmailModel emailModel , List<String> grades) {
         /*
          * if we send userId send email for this user.
          * else send email for everyone.
@@ -78,12 +80,17 @@ public class NotificationServiceImpl implements NotificationService  {
         Notif notif = Notif.builder()
                 .message(emailModel.getMsgBody())
                 .title(emailModel.getSubject())
-                .createAt(LocalDate.now())
+                .createAt(Timestamp.valueOf(LocalDateTime.now()))
                 .build();
 
 //        List<User> users = userRepository.findAll(professor.getEmail());
 //        User professor = userRepository.findByGrade(Grade.PROFESSOR);
-        List<User> users = userRepository.findAllByGrade(Grade.valueOf(grade));
+        List<Grade> gradesEnum = new ArrayList<>();
+        for (String grade : grades) {
+            gradesEnum.add(Grade.valueOf(grade));
+        }
+
+        List<User> users = userRepository.findAllByGrade(gradesEnum);
         String[] userEmails = new String[users.size()];
         MimeMessagePreparator mailMessage = mimeMessage -> {
 
