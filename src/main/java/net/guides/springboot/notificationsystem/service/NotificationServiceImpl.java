@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -74,6 +75,12 @@ public class NotificationServiceImpl implements NotificationService  {
          * */
 
         User professor = userRepository.findByEmail(Utils.getUserEmail());
+        Notif notif = Notif.builder()
+                .message(emailModel.getMsgBody())
+                .title(emailModel.getSubject())
+                .createAt(LocalDate.now())
+                .build();
+
 //        List<User> users = userRepository.findAll(professor.getEmail());
 //        User professor = userRepository.findByGrade(Grade.PROFESSOR);
         List<User> users = userRepository.findAllByGrade(Grade.valueOf(grade));
@@ -106,6 +113,7 @@ public class NotificationServiceImpl implements NotificationService  {
         };
 
         javaMailSender.send(mailMessage);
+        notificationRepository.save(notif);
 
     }
 

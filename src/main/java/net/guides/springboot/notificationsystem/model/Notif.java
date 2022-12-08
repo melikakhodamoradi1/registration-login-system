@@ -1,9 +1,11 @@
 package net.guides.springboot.notificationsystem.model;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "notifications")
 @Entity
+@Builder
 public class Notif {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +39,6 @@ public class Notif {
     private List<NotificationType> types;
     private Status state;
     private String senderId;
-
+    private LocalDate createAt;
 }
 

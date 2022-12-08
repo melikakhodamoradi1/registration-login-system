@@ -21,10 +21,10 @@ public class UserDto {
     private String firstName;
     @NotEmpty
     private String lastName;
-    @NotEmpty(message = "Email should not be empty")
+    @NotEmpty(message = "ایمیل نباید خالی باشد")
     @Email
     private String email;
-    @NotEmpty(message = "Password should be empty")
+    @NotEmpty(message = "رمز عبور نباید خالی باشد")
     private String password;
     private String grade;
     /**/

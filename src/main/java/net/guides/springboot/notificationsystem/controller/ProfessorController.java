@@ -19,7 +19,7 @@ public class ProfessorController {
     private final UserService userService;
 
     @RequestMapping(value = "/professorWorkbench")
-    public String studentWork(Model model , HttpSession session) {
+    public String professorWork(Model model , HttpSession session) {
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users",users);
         model.addAttribute("nameUser",session.getAttribute("name"));
