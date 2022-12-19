@@ -6,6 +6,7 @@ import net.guides.springboot.notificationsystem.model.Notif;
 import net.guides.springboot.notificationsystem.repository.NotificationRepository;
 import net.guides.springboot.notificationsystem.repository.UserRepository;
 import net.guides.springboot.notificationsystem.service.model.Grade;
+import net.guides.springboot.notificationsystem.util.CalendarTool;
 import org.aspectj.weaver.ast.Not;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +48,15 @@ class RegistrationLoginSystemApplicationTest {
         for (String grade : grades) {
             gradesEnum.add(Grade.valueOf(grade));
         }
+        Calendar calendar = Calendar.getInstance();
+        Timestamp now = new Timestamp(calendar.getTimeInMillis());
+        CalendarTool ca = new CalendarTool(now);
+        String createAt = ca.getIranianDateTime2(new Locale("fa"));
         List<User> users = userRepository.findAllByGrade(gradesEnum);
         Set<User> userSet = new HashSet<>(users);
-        Calendar calendar = Calendar.getInstance();
         Notif notif = Notif.builder()
                 .title("Title")
-                .createAt(new Timestamp(calendar.getTimeInMillis()))
+                .createAt(createAt)
                 .users(userSet)
                 .build();
         notificationRepository.save(notif);

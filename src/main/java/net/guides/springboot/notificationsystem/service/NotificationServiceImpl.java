@@ -7,6 +7,7 @@ import net.guides.springboot.notificationsystem.repository.NotificationRepositor
 import net.guides.springboot.notificationsystem.repository.UserRepository;
 import net.guides.springboot.notificationsystem.service.model.EmailModel;
 import net.guides.springboot.notificationsystem.service.model.Grade;
+import net.guides.springboot.notificationsystem.util.CalendarTool;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,10 +18,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -77,10 +75,11 @@ public class NotificationServiceImpl implements NotificationService  {
          * */
 
         User professor = userRepository.findByEmail(Utils.getUserEmail());
+        String createAt = getCreateAtTimeString();
         Notif notif = Notif.builder()
                 .message(emailModel.getMsgBody())
                 .title(emailModel.getSubject())
-                .createAt(Timestamp.valueOf(LocalDateTime.now()))
+                .createAt(createAt)
                 .build();
 
 //        List<User> users = userRepository.findAll(professor.getEmail());
@@ -124,6 +123,12 @@ public class NotificationServiceImpl implements NotificationService  {
 
     }
 
+    private String getCreateAtTimeString() {
+        Calendar calendar = Calendar.getInstance();
+        Timestamp now = new Timestamp(calendar.getTimeInMillis());
+        CalendarTool ca = new CalendarTool(now);
+        return ca.getIranianDateTime2(new Locale("fa"));
+    }
 
 
 }

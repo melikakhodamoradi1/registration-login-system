@@ -42,7 +42,7 @@ public class Notif {
     private Status state;
     private String senderId;
 
-    private Timestamp createAt;
+    private String createAt;
 
     @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.MERGE)
     @JoinTable(
