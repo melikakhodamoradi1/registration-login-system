@@ -30,3 +30,4 @@ services:
       - DATABASE_PASSWORD=A13781378a
       - DATABASE_NAME=login_system
       - DATABASE_PORT=3306
+      - SERVER_PORT=8080
