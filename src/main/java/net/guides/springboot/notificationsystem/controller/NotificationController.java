@@ -75,7 +75,7 @@ public class NotificationController {
         List<NotifModel> notifModels =  notificationService.getListsNotifModel();
         model.addAttribute("notifs",notifModels);
         model.addAttribute("nameUser",session.getAttribute("name"));
-        return "professorNotifications";
+        return "messages";
     }
 
     @PostMapping("/send-email")
