@@ -1,5 +1,6 @@
 package net.guides.springboot.notificationsystem.repository;//package net.guides.springboot.notificationsystem.repository;
 import net.guides.springboot.notificationsystem.model.Notif;
+import net.guides.springboot.notificationsystem.service.model.NotifModel;
 import org.springframework.stereotype.Repository;
 
 
@@ -15,6 +16,7 @@ public interface NotificationRepository extends PagingAndSortingRepository<Notif
 
     Optional<Notif> findById(Long id);
     List<Notif> findAll();
+    List<NotifModel> findNotifsByUsersId(Long userId);
 
 //    Notification save(Notification notification);
 //    Optional<Notification> deleteById(Long userId);

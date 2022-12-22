@@ -7,6 +7,7 @@ import net.guides.springboot.notificationsystem.repository.NotificationRepositor
 import net.guides.springboot.notificationsystem.repository.UserRepository;
 import net.guides.springboot.notificationsystem.service.model.EmailModel;
 import net.guides.springboot.notificationsystem.service.model.Grade;
+import net.guides.springboot.notificationsystem.service.model.NotifModel;
 import net.guides.springboot.notificationsystem.util.CalendarTool;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSendException;
@@ -19,10 +20,11 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
-public class NotificationServiceImpl implements NotificationService  {
+public class NotificationServiceImpl implements NotificationService {
 
     private final NotificationRepository notificationRepository;
 
@@ -34,8 +36,7 @@ public class NotificationServiceImpl implements NotificationService  {
     private String sender;
 
 
-
-    public NotificationServiceImpl(NotificationRepository notificationRepository , JavaMailSender javaMailSender, UserRepository userRepository ) {
+    public NotificationServiceImpl(NotificationRepository notificationRepository, JavaMailSender javaMailSender, UserRepository userRepository) {
         this.notificationRepository = notificationRepository;
         this.javaMailSender = javaMailSender;
         this.userRepository = userRepository;
@@ -43,17 +44,14 @@ public class NotificationServiceImpl implements NotificationService  {
     }
 
 
-
-
     @Override
     public Notif getByUserId(Long userId) {
 
         Optional<Notif> optionalNotification = notificationRepository.findById(userId);
         Notif notif1 = null;
-        if (optionalNotification.isPresent()){
+        if (optionalNotification.isPresent()) {
             notif1 = optionalNotification.get();
-        }
-        else
+        } else
             throw new RuntimeException("notification not found for user id : " + userId);
         return notif1;
     }
@@ -68,19 +66,15 @@ public class NotificationServiceImpl implements NotificationService  {
         notificationRepository.save(notif);
     }
 
-    public void sendEmail(EmailModel emailModel , List<String> grades) {
+    public void sendEmail(EmailModel emailModel, List<String> grades) {
         /*
          * if we send userId send email for this user.
          * else send email for everyone.
          * */
 
-        User professor = userRepository.findByEmail(Utils.getUserEmail());
+        User professor = getUserByEmail(Utils.getUserEmail());
         String createAt = getCreateAtTimeString();
-        Notif notif = Notif.builder()
-                .message(emailModel.getMsgBody())
-                .title(emailModel.getSubject())
-                .createAt(createAt)
-                .build();
+
 
 //        List<User> users = userRepository.findAll(professor.getEmail());
 //        User professor = userRepository.findByGrade(Grade.PROFESSOR);
@@ -90,6 +84,15 @@ public class NotificationServiceImpl implements NotificationService  {
         }
 
         List<User> users = userRepository.findAllByGrade(gradesEnum);
+        Set<User> userSet = new HashSet<>(users);
+        userSet.add(professor);
+        Notif notif = Notif.builder()
+                .message(emailModel.getMsgBody())
+                .title(emailModel.getSubject())
+                .createAt(createAt)
+                .sender(professor.getName())
+                .users(userSet)
+                .build();
         String[] userEmails = new String[users.size()];
         MimeMessagePreparator mailMessage = mimeMessage -> {
 
@@ -123,11 +126,28 @@ public class NotificationServiceImpl implements NotificationService  {
 
     }
 
+    @Override
+    public List<NotifModel> getListsNotifModel() {
+        User user = getUserByEmail(Utils.getUserEmail());
+        return notificationRepository.findNotifsByUsersId(user.getId()).stream()
+                .peek(notifModel -> notifModel.setCreateAt(fixedCreatAtToPersian(notifModel.getCreateAt())))
+                .collect(Collectors.toList());
+    }
+
     private String getCreateAtTimeString() {
         Calendar calendar = Calendar.getInstance();
         Timestamp now = new Timestamp(calendar.getTimeInMillis());
         CalendarTool ca = new CalendarTool(now);
         return ca.getIranianDateTime2(new Locale("fa"));
+    }
+
+    private User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    private String fixedCreatAtToPersian(String createAt) {
+        String[] dateAndTime = createAt.split(" ");
+        return dateAndTime[1] + " " + dateAndTime[0];
     }
 
 

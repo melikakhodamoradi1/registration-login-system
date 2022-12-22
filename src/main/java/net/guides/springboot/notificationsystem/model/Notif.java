@@ -1,15 +1,8 @@
 package net.guides.springboot.notificationsystem.model;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import net.guides.springboot.notificationsystem.entity.User;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Data
@@ -18,6 +11,7 @@ import java.util.*;
 @Table(name = "notifications")
 @Entity
 @Builder
+@ToString
 public class Notif {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +35,7 @@ public class Notif {
     private List<NotificationType> types;
     private Status state;
     private String senderId;
+    private String sender;
 
     private String createAt;
 
@@ -51,6 +46,13 @@ public class Notif {
             inverseJoinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")}
     )
     private Set<User> users = new HashSet<>();
+
+    public Notif(String title , String message ,String sender , String createAt) {
+        this.title = title;
+        this.message = message;
+        this.sender = sender;
+        this.createAt = createAt;
+    }
 
 }
 

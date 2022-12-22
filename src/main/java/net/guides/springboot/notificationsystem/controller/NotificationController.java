@@ -9,16 +9,22 @@ import net.guides.springboot.notificationsystem.service.NotificationFactory;
 import net.guides.springboot.notificationsystem.service.NotificationService;
 import net.guides.springboot.notificationsystem.service.PushNotificationService;
 import net.guides.springboot.notificationsystem.service.model.EmailModel;
+import net.guides.springboot.notificationsystem.service.model.NotifModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.websocket.Session;
 import java.util.List;
 
 
-@RestController
+@Controller
 //@RequiredArgsConstructor
 @RequestMapping("/notifications")
 public class NotificationController {
@@ -64,17 +70,25 @@ public class NotificationController {
      *
      * @return the all notifications
      */
-    @GetMapping("/get/{id}")
-    public List<Notif> notificationList(){
-        List <Notif> list = notificationService.getAllNotifications();
-        return list;
+    @GetMapping("/get")
+    public String notificationList(Model model, HttpSession session){
+        List<NotifModel> notifModels =  notificationService.getListsNotifModel();
+        model.addAttribute("notifs",notifModels);
+        model.addAttribute("nameUser",session.getAttribute("name"));
+        return "professorNotifications";
     }
 
     @PostMapping("/send-email")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void sendEmail(@ModelAttribute("userDTO") EmailModel emailModel , @RequestParam("grade") List<String> grade) {
+    public String sendEmail(Model model ,@ModelAttribute("userDTO") EmailModel emailModel , BindingResult result, @RequestParam("grade") List<String> grade) {
         notificationService.sendEmail(emailModel , grade);
+        if(result.hasErrors()){
+            return "/professorWorkbench";
+        }
+        model.addAttribute("message","عملیات با موفقیت انجام شد.");
+        return "redirect:/professorWorkbench?success";
     }
+
 
     /*@PostMapping("/send-notification")
     @ResponseBody

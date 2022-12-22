@@ -67,4 +67,11 @@ class RegistrationLoginSystemApplicationTest {
     void testLocalDateTime() {
         System.out.println(notificationRepository.findById(16L).get().getCreateAt());
     }
+
+    @Test
+    void findNotifsByUserId() {
+        notificationRepository.findNotifsByUsersId(2L).forEach(
+                System.out::println
+        );
+    }
 }

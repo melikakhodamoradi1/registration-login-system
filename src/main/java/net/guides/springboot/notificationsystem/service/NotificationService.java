@@ -3,6 +3,7 @@ package net.guides.springboot.notificationsystem.service;
 
 import net.guides.springboot.notificationsystem.model.Notif;
 import net.guides.springboot.notificationsystem.service.model.EmailModel;
+import net.guides.springboot.notificationsystem.service.model.NotifModel;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ public interface NotificationService {
     void save(Notif notif);
 
     void sendEmail(EmailModel emailModel , List<String> grades);
+
+    List<NotifModel> getListsNotifModel();
 
 
 }
