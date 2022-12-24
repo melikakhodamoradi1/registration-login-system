@@ -55,11 +55,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    // TODO: 12/24/2022 Create Entity Student and set Relation Between Professor and Student
     @Override
     public List<UserDto> findAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream()
-                .map((user) -> mapToUserDto(user))
+                .filter(user -> !user.getGrade().name().equals("PROFESSOR"))
+                .map(this::mapToUserDto)
                 .collect(Collectors.toList());
     }
 
