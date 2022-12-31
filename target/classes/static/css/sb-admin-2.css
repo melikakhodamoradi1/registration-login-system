@@ -11300,3 +11300,11 @@ body.sidebar-toggled footer.sticky-footer {
 .sidebar {
   padding: 0!important;
 }
+
+.logo2 {
+  width:100px;
+  display: block;
+  border-radius: 50%;
+  border:1px solid #333;
+  margin:5px auto;
+}

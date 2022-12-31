@@ -43,7 +43,7 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">خوش آمدید</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">به سامانه ی اطلاع رسانی دانشکده مهندسی کامپیوتر خوش آمدید</h1>
                                 </div>
                                 <form class="user" method="post"
                                       th:action="@{/register/save}"
@@ -99,9 +99,12 @@
                                     </div>
                                     <div class="form-group">
                                         <select name="type" class="form-control" th:name="grade">
-                                            <option value="DOCTORAL_STUDENT">دکتری</option>
-                                            <option value="GRADUATE">کارشناسی ارشد</option>
-                                            <option value="UNDER_GRADUATE">کارشناسی</option>
+                                            <option value="DOCTORAL_STUDENT">دانشجوی دکتری</option>
+                                            <option value="GRADUATE">دانشجوی کارشناسی ارشد</option>
+                                            <option value="UNDER_GRADUATE">دانشجوی کارشناسی</option>
+                                            <option value="ALUMNUS">دانشجوی فارغ التحصیل</option>
+                                            <option value="OTHER">غیر</option>
+                                            <option value="FACULTY_MEMBER">عضو هیئت علمی</option>
                                         </select>
                                     </div>
 

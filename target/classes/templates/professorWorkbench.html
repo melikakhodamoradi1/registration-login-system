@@ -33,11 +33,7 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <div>
-        <div class="alert alert-info">
-            <span class="alert" , th:text="${message}"></span>
-        </div>
-    </div>
+
 
 
 
@@ -127,6 +123,12 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
+                <div th:if="${message}">
+                    <div class="alert alert-info">
+                        <span class="alert" , th:text="${message}"></span>
+                    </div>
+                </div>
+
 
                 <div class="card shadow mb-4">
 
@@ -136,6 +138,7 @@
                     </div>
                     <div class="card-body">
                         <form class="user" method="post"
+                              enctype="multipart/form-data"
                               role="form"
                               th:action="@{/notifications/send-email}">
                             <div class="form-group">
@@ -152,10 +155,24 @@
                             </div>
 
                             <div class="form-group">
+                                <label>
+                                    فایل پیوست
+                                    <input type="file" class="form-control form-control-user"
+                                           name="attachment" aria-describedby="attachment"
+                                          >
+                                </label>
+                            </div>
+
+                            <div class="form-group">
                                 <select name="type" class="form-control" th:name="grade" multiple>
-                                    <option value="DOCTORAL_STUDENT">دکتری</option>
-                                    <option value="GRADUATE">کارشناسی ارشد</option>
-                                    <option value="UNDER_GRADUATE">کارشناسی</option>
+
+                                    <option value="DOCTORAL_STUDENT">دانشجوی دکتری</option>
+                                    <option value="GRADUATE"> دانشجوی کارشناسی ارشد</option>
+                                    <option value="UNDER_GRADUATE">دانشجوی کارشناسی</option>
+                                    <option value="ALUMNUS">دانشجوی فارغ التحصیل</option>
+                                    <option value="OTHER">غیر</option>
+                                    <option value="FACULTY_MEMBER">عضو هیئت علمی</option>
+                                    <option value="ALL">همه</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -174,31 +191,188 @@
                         <h6 class="m-0 font-weight-bold text-primary">لیست دانشجو ها</h6>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>نام</th>
-                                    <th>نام خانوادگی</th>
-                                    <th>ایمیل</th>
-                                    <th>مقطع</th>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#menu1">دانشجوی کارشناسی</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu2">دانشجوی کارشناسی ارشد</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu3">دانشجوی دکتری</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu4">عضو هیئت علمی</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu5">فارغ التحصیل</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu6">غیر</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane container active" id="menu1">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>نام</th>
+                                            <th>نام خانوادگی</th>
+                                            <th>ایمیل</th>
+                                            <th>مقطع</th>
 
 
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <!-- loop k be tedad e lisst e karbara becharkhe -->
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!-- loop k be tedad e lisst e karbara becharkhe -->
 
-                                <tr th:each="user : ${users}">
-                                    <td th:text="${user.firstName}"></td>
-                                    <td th:text="${user.lastName}"></td>
-                                    <td th:text="${user.email}"></td>
-                                    <td th:text="${user.grade}"></td>
-                                </tr>
+                                        <!-- MOTEGHAYERI K AZ BACK MIAD BEJA users-->
+                                        <tr th:each="user: ${users}">
+                                            <td th:text="${user.firstName}"></td>
+                                            <td th:text="${user.lastName}"></td>
+                                            <td th:text="${user.email}"></td>
+                                            <td th:text="${user.grade}"></td>
+                                        </tr>
 
-                                </tbody>
-                            </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane container fade" id="menu2"> <div class="table-responsive">
+                                <table class="table table-bordered dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>نام خانوادگی</th>
+                                        <th>ایمیل</th>
+                                        <th>مقطع</th>
+
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- loop k be tedad e lisst e karbara becharkhe -->
+
+                                    <tr th:each="user: ${users}">
+                                        <td th:text="${user.firstName}"></td>
+                                        <td th:text="${user.lastName}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td th:text="${user.grade}"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div></div>
+                            <div class="tab-pane container fade" id="menu3"> <div class="table-responsive">
+                                <table class="table table-bordered dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>نام خانوادگی</th>
+                                        <th>ایمیل</th>
+                                        <th>مقطع</th>
+
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- loop k be tedad e lisst e karbara becharkhe -->
+
+                                    <tr th:each="user: ${users}">
+                                        <td th:text="${user.firstName}"></td>
+                                        <td th:text="${user.lastName}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td th:text="${user.grade}"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div></div>
+                            <div class="tab-pane container fade" id="menu4"> <div class="table-responsive">
+                                <table class="table table-bordered dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>نام خانوادگی</th>
+                                        <th>ایمیل</th>
+                                        <th>مقطع</th>
+
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- loop k be tedad e lisst e karbara becharkhe -->
+
+                                    <tr th:each="user : ${users}">
+                                        <td th:text="${user.firstName}"></td>
+                                        <td th:text="${user.lastName}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td th:text="${user.grade}"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div></div>
+                            <div class="tab-pane container fade" id="menu5"> <div class="table-responsive">
+                                <table class="table table-bordered dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>نام خانوادگی</th>
+                                        <th>ایمیل</th>
+                                        <th>مقطع</th>
+
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- loop k be tedad e lisst e karbara becharkhe -->
+
+                                    <tr th:each="user : ${users}">
+                                        <td th:text="${user.firstName}"></td>
+                                        <td th:text="${user.lastName}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td th:text="${user.grade}"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div></div>
+                            <div class="tab-pane container fade" id="menu6"> <div class="table-responsive">
+                                <table class="table table-bordered dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>نام خانوادگی</th>
+                                        <th>ایمیل</th>
+                                        <th>مقطع</th>
+
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- loop k be tedad e lisst e karbara becharkhe -->
+
+                                    <tr th:each="user : ${users}">
+                                        <td th:text="${user.firstName}"></td>
+                                        <td th:text="${user.lastName}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td th:text="${user.grade}"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div></div>
+
                         </div>
+
+
                     </div>
                 </div>
 

@@ -62,7 +62,7 @@ public class AuthController {
 
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
-                    "حساب کاربری با این اییل از قبل وجود دارد");
+                    "حساب کاربری با این ایمیل از قبل وجود دارد");
         }
 
         if(result.hasErrors()){
@@ -108,7 +108,7 @@ public class AuthController {
         ).collect(Collectors.toList());
         if (roles.isEmpty()) {
             session.setAttribute("name",user.getName());
-            return "redirect:/user/userWorkbench";
+            return "redirect:/notifications/get";
         }
         else {
             session.setAttribute("name",user.getName());
