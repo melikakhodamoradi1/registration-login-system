@@ -11302,9 +11302,32 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .logo2 {
+
+}
+
+.logo-container {
+  background-color: #4e73df;
+  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+  border-radius: 50%;
+  padding: 1rem;
+  display: block;
+  margin: 0 auto;
+  width: 140px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.logo-container img {
   width:100px;
   display: block;
-  border-radius: 50%;
+  border-radius: 15px;
   border:1px solid #333;
   margin:5px auto;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: 1s all;
 }
+
+.logo-container img:hover {
+  transform: scale(1.5,1.5) rotate(360deg);
+  border-radius: 50%;
+}
+
