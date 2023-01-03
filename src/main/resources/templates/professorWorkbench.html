@@ -37,6 +37,7 @@
 
 
 
+
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -129,6 +130,12 @@
                     </div>
                 </div>
 
+                <div th:if="${message}">
+                    <div class="alert alert-info">
+                        <span class="alert" , th:text="${message}"></span>
+                    </div>
+                </div>
+
 
                 <div class="card shadow mb-4">
 
@@ -138,6 +145,7 @@
                     </div>
                     <div class="card-body">
                         <form class="user" method="post"
+                              enctype="multipart/form-data"
                               enctype="multipart/form-data"
                               role="form"
                               th:action="@{/notifications/send-email}">
@@ -165,6 +173,14 @@
 
                             <div class="form-group">
                                 <select name="type" class="form-control" th:name="grade" multiple>
+
+                                    <option value="DOCTORAL_STUDENT">دانشجوی دکتری</option>
+                                    <option value="GRADUATE"> دانشجوی کارشناسی ارشد</option>
+                                    <option value="UNDER_GRADUATE">دانشجوی کارشناسی</option>
+                                    <option value="ALUMNUS">دانشجوی فارغ التحصیل</option>
+                                    <option value="OTHER">غیر</option>
+                                    <option value="FACULTY_MEMBER">عضو هیئت علمی</option>
+                                    <option value="ALL">همه</option>
 
                                     <option value="DOCTORAL_STUDENT">دانشجوی دکتری</option>
                                     <option value="GRADUATE"> دانشجوی کارشناسی ارشد</option>
@@ -359,6 +375,10 @@
                                     </thead>
                                     <tbody>
                                     <!-- loop k be tedad e lisst e karbara becharkhe -->
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- loop k be tedad e lisst e karbara becharkhe -->
 
                                     <tr th:each="user : ${usersOther}">
                                         <td th:text="${user.firstName}"></td>
@@ -371,7 +391,13 @@
                                 </table>
                             </div></div>
 
+                                    </tbody>
+                                </table>
+                            </div></div>
+
                         </div>
+
+
 
 
                     </div>
