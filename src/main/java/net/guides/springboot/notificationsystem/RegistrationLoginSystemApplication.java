@@ -30,5 +30,17 @@ public class RegistrationLoginSystemApplication {
 
         SpringApplication.run(RegistrationLoginSystemApplication.class, args);
     }
+
+    //    @EventListener(ApplicationReadyEvent.class)
+//    public void sendEmail() {
+//        EmailModel emailModel = EmailModel.builder()
+//                .msgBody("این سرویس دارد کار میکند.")
+//                .subject("Attachment File")
+//                .attachment("C:\\Users\\ASUS CENTER QOM\\Desktop\\sharif-university-logo_color.jpg")
+//                .build();
+//
+//        List<String> grades = List.of("DOCTORAL_STUDENT","UNDER_GRADUATE");
+//        service.sendEmail(emailModel,grades);
+//    }
 }
 

@@ -2,10 +2,7 @@ package net.guides.springboot.notificationsystem.dto;
 
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import net.guides.springboot.notificationsystem.service.model.Grade;
 
 import javax.validation.constraints.Email;
@@ -15,6 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class UserDto {
     private Long id;
     @NotEmpty

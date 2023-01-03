@@ -1,6 +1,7 @@
 package net.guides.springboot.notificationsystem.service;
 
 import net.guides.springboot.notificationsystem.dto.UserDto;
+import net.guides.springboot.notificationsystem.entity.Role;
 import net.guides.springboot.notificationsystem.entity.User;
 import net.guides.springboot.notificationsystem.repository.RoleRepository;
 import net.guides.springboot.notificationsystem.repository.UserRepository;
@@ -8,10 +9,6 @@ import net.guides.springboot.notificationsystem.service.model.Grade;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
-
-
-import net.guides.springboot.notificationsystem.entity.Role;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +23,8 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserRepository userRepository,
                            RoleRepository roleRepository,
-                           PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder
+                           ) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -61,6 +59,14 @@ public class UserServiceImpl implements UserService {
         List<User> users = userRepository.findAll();
         return users.stream()
                 .filter(user -> !user.getGrade().name().equals("PROFESSOR"))
+                .map(this::mapToUserDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserDto> findUsersByGrade(String grade) {
+        return userRepository.findAllByGrade(List.of(Grade.valueOf(grade)))
+                .stream()
                 .map(this::mapToUserDto)
                 .collect(Collectors.toList());
     }

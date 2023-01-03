@@ -80,8 +80,8 @@ public class NotificationController {
 
     @PostMapping("/send-email")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String sendEmail(Model model ,@ModelAttribute("userDTO") EmailModel emailModel , BindingResult result, @RequestParam("grade") List<String> grade) {
-        notificationService.sendEmail(emailModel , grade);
+    public String sendEmail(Model model , @RequestParam("file") MultipartFile file, @ModelAttribute("userDTO") EmailModel emailModel , BindingResult result, @RequestParam("grade") List<String> grade) {
+        notificationService.sendEmail(file,emailModel , grade);
         if(result.hasErrors()){
             return "/professorWorkbench";
         }
@@ -95,6 +95,20 @@ public class NotificationController {
     public String sendNotification(@RequestBody Notif note) throws FirebaseMessagingException, IOException, FirebaseAuthException {
         return fireBaseMessagingService.sendNotification(note, null);
     }*/
+
+    @PostMapping("/search/notif")
+    public String getNotfsBySearchHashtag(@RequestParam("search") String search, Model model , HttpSession session) {
+
+        if (Objects.nonNull(search)){
+            List<NotifModel> notifModels =  notificationService.getListsNotifModelWithHashtag(search);
+            model.addAttribute("notifs",notifModels);
+        } else {
+            model.addAttribute("notifs",notificationService.getListsNotifModel());
+        }
+
+        model.addAttribute("nameUser",session.getAttribute("name"));
+        return "messages";
+    }
 
 
 

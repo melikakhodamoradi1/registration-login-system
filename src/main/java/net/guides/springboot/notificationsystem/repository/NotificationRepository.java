@@ -18,9 +18,7 @@ public interface NotificationRepository extends PagingAndSortingRepository<Notif
     List<Notif> findAll();
     List<NotifModel> findNotifsByUsersId(Long userId);
 
-//    Notification save(Notification notification);
-//    Optional<Notification> deleteById(Long userId);
-//    Notification updateNotification(Long userId, Model model);
+    List<NotifModel> findNotifsByMessageContaining(String search);
 
 
 }

@@ -10,12 +10,18 @@ import net.guides.springboot.notificationsystem.service.model.Grade;
 import net.guides.springboot.notificationsystem.service.model.NotifModel;
 import net.guides.springboot.notificationsystem.util.CalendarTool;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -66,7 +72,7 @@ public class NotificationServiceImpl implements NotificationService {
         notificationRepository.save(notif);
     }
 
-    public void sendEmail(EmailModel emailModel, List<String> grades) {
+    public void sendEmail(MultipartFile file,EmailModel emailModel, List<String> grades) {
         /*
          * if we send userId send email for this user.
          * else send email for everyone.
@@ -108,13 +114,12 @@ public class NotificationServiceImpl implements NotificationService {
 
 
                 message.setCc(userEmails);
-
-
-//              message.setReplyTo(sender);
                 String subject = emailModel.getSubject().concat("new message from " + professor.getName());
                 message.setSubject(subject);
-//              message.setSubject(emailModel.getSubject());
                 message.setText(emailModel.getMsgBody());
+                if (!file.isEmpty())
+                    message.addAttachment(StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename())),file);
+
 
             } catch (Exception e) {
                 throw new MailSendException(emailModel.getRecipient(), e);
@@ -123,6 +128,7 @@ public class NotificationServiceImpl implements NotificationService {
 
         javaMailSender.send(mailMessage);
         notificationRepository.save(notif);
+        System.out.println("Send Email Successfully");
 
     }
 
@@ -130,6 +136,14 @@ public class NotificationServiceImpl implements NotificationService {
     public List<NotifModel> getListsNotifModel() {
         User user = getUserByEmail(Utils.getUserEmail());
         return notificationRepository.findNotifsByUsersId(user.getId()).stream()
+                .peek(notifModel -> notifModel.setCreateAt(fixedCreatAtToPersian(notifModel.getCreateAt())))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<NotifModel> getListsNotifModelWithHashtag(String searchKey) {
+        return notificationRepository.findNotifsByMessageContaining(searchKey)
+                .stream()
                 .peek(notifModel -> notifModel.setCreateAt(fixedCreatAtToPersian(notifModel.getCreateAt())))
                 .collect(Collectors.toList());
     }
