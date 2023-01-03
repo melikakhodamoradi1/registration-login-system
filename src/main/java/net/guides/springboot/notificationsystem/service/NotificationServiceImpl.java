@@ -89,7 +89,13 @@ public class NotificationServiceImpl implements NotificationService {
             gradesEnum.add(Grade.valueOf(grade));
         }
 
-        List<User> users = userRepository.findAllByGrade(gradesEnum);
+
+        List<User> users = new ArrayList<>();
+        
+        if (grades.contains("ALL"))
+            users.addAll(userRepository.findAll(Utils.getUserEmail()));
+        else 
+            users.addAll(userRepository.findAllByGrade(gradesEnum));
         Set<User> userSet = new HashSet<>(users);
         userSet.add(professor);
         Notif notif = Notif.builder()
