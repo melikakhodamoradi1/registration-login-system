@@ -99,7 +99,7 @@ public class NotificationController {
     }*/
 
     @PostMapping("/search/notif")
-    public String getNotfsBySearchHashtag(@RequestParam("search") String search, Model model , HttpSession session) {
+    public String getNotfsBySearchHashtag(@RequestBody String search, Model model , HttpSession session) {
 
         if (Objects.nonNull(search)){
             List<NotifModel> notifModels =  notificationService.getListsNotifModelWithHashtag(search);
