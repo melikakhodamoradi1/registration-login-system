@@ -53,4 +53,12 @@
     e.preventDefault();
   });
 
+  $('#grades').on('change', function (e) {
+    console.log($(this).val()," , ", $('#the-tab li a[href="'+$(this).val()+'"]'),'#the-tab li a[href="'+$(this).val()+'"]');
+    // With $(this).val(), you can **(and have to!)** specify the target in your <option> values.
+    $('#the-tab li a[href="'+$(this).val()+'"]').tab('show');
+    // If you do not care about the sorting, you can work with $(this).index().
+    // $('#the-tab li a').eq($(this).index()).tab('show');
+  });
+
 })(jQuery); // End of use strict

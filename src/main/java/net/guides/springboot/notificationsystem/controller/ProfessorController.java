@@ -18,6 +18,8 @@ public class ProfessorController {
 
     private final UserService userService;
 
+    // for ui dropdown
+
     @RequestMapping(value = "/professorWorkbench")
     public String professorWork(Model model , HttpSession session) {
         List<UserDto> users = userService.findAllUsers();
@@ -35,7 +37,7 @@ public class ProfessorController {
 
 
 
-    @RequestMapping("/getUsersByGrade")
+    @RequestMapping("/fetch-by-grade")
     public List<UserDto> getUsersByGrade(String grade) {
         return userService.findUsersByGrade(grade);
     }
