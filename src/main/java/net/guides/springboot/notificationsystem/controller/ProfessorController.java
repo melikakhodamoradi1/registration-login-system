@@ -7,10 +7,12 @@ import net.guides.springboot.notificationsystem.service.model.Grade;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @Controller("/professor")
 @RequiredArgsConstructor

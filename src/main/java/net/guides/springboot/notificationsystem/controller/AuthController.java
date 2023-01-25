@@ -1,4 +1,5 @@
 package net.guides.springboot.notificationsystem.controller;
+import lombok.RequiredArgsConstructor;
 import net.guides.springboot.notificationsystem.dto.PushNotificationRequest;
 import net.guides.springboot.notificationsystem.dto.PushNotificationResponse;
 import net.guides.springboot.notificationsystem.dto.UserDto;

@@ -148,6 +148,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<NotifModel> getListsNotifModelWithHashtag(String searchKey) {
+        searchKey = "#" + searchKey;
         return notificationRepository.findNotifsByMessageContaining(searchKey)
                 .stream()
                 .peek(notifModel -> notifModel.setCreateAt(fixedCreatAtToPersian(notifModel.getCreateAt())))
