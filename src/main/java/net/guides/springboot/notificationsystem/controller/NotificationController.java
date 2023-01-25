@@ -17,11 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.websocket.Session;
 import java.util.List;
+import java.util.Objects;
 
 
 @Controller
@@ -97,7 +99,7 @@ public class NotificationController {
     }*/
 
     @PostMapping("/search/notif")
-    public String getNotfsBySearchHashtag(@RequestParam("search") String search, Model model , HttpSession session) {
+    public String getNotfsBySearchHashtag(@RequestParam(value = "search")String search, Model model , HttpSession session) {
 
         if (Objects.nonNull(search)){
             List<NotifModel> notifModels =  notificationService.getListsNotifModelWithHashtag(search);

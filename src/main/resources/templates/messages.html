@@ -55,7 +55,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="/notifications/get">
         <i class="fas fa-fw fa-table"></i>
-        <span>لیست پیام ها</span></a>
+        <span>2لیست پیام ها</span></a>
     </li>
 
     <li class="nav-item">
@@ -128,6 +128,13 @@
             <h6 class="m-0 font-weight-bold text-primary">لیست پیام ها</h6>
           </div>
           <div class="card-body">
+
+            <form method="POST" th:action="@{search/notif}" class="form-inline">
+              <input type="text" class="form-control" placeholder="جستجو HashTag" name="search">
+
+              <button class="btn btn-success"> جستجو</button>
+              <input type="button" class="btn-dark" value="Clear" onclick="clearSearch()">
+            </form>
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -216,5 +223,11 @@
 <script src="/js/demo/datatables-demo.js"></script>
 
 </body>
+
+<script type="text/javascript">
+  function clearSearch() {
+    window.location = "/notifications/get";
+  }
+</script>
 
 </html>
