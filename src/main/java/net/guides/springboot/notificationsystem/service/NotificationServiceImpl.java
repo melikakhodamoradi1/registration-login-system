@@ -1,5 +1,6 @@
 package net.guides.springboot.notificationsystem.service;
 
+import com.sun.xml.bind.v2.TODO;
 import net.guides.springboot.notificationsystem.entity.User;
 import net.guides.springboot.notificationsystem.model.Notif;
 
@@ -118,7 +119,7 @@ public class NotificationServiceImpl implements NotificationService {
 
 //              message.addTo(emailModel.getRecipient());
 
-
+                //TODO CHECK RTL FOR SUBJECT AND MESSAGE WITH HTML AND CSS
                 message.setCc(userEmails);
                 String subject = emailModel.getSubject().concat("new message from " + professor.getName());
                 message.setSubject(subject);
