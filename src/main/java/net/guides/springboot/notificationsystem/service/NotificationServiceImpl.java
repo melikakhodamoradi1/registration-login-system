@@ -114,7 +114,7 @@ public class NotificationServiceImpl implements NotificationService {
                 for (int i = 0; i < users.size(); i++) {
                     userEmails[i] = users.get(i).getEmail();
                 }
-                message.setFrom(sender, "مرکز آموزش های دانشگاه شهید بهشتی"); // Here comes your name
+                message.setFrom(sender, "سامانه ی اطلاع رسانی دانشکده مهندسی کامپیوتر شهید بهشتی"); // Here comes your name
 
 //              message.addTo(emailModel.getRecipient());
 
