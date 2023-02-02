@@ -1,8 +1,7 @@
 package net.guides.springboot.notificationsystem.service;
 
-import com.sun.xml.bind.v2.TODO;
 import net.guides.springboot.notificationsystem.entity.User;
-import net.guides.springboot.notificationsystem.model.Notif;
+import net.guides.springboot.notificationsystem.entity.Notif;
 
 import net.guides.springboot.notificationsystem.repository.NotificationRepository;
 import net.guides.springboot.notificationsystem.repository.UserRepository;
@@ -11,7 +10,6 @@ import net.guides.springboot.notificationsystem.service.model.Grade;
 import net.guides.springboot.notificationsystem.service.model.NotifModel;
 import net.guides.springboot.notificationsystem.util.CalendarTool;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -20,12 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -124,7 +117,7 @@ public class NotificationServiceImpl implements NotificationService {
                 String subject = emailModel.getSubject().concat("new message from " + professor.getName());
                 message.setSubject(subject);
                 message.setText(emailModel.getMsgBody());
-                if (!file.isEmpty())
+                if (!file.isEmpty()) //attachment
                     message.addAttachment(StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename())),file);
 
 
@@ -133,7 +126,7 @@ public class NotificationServiceImpl implements NotificationService {
             }
         };
 
-        javaMailSender.send(mailMessage);
+        javaMailSender.send(mailMessage);  //sending email
         notificationRepository.save(notif);
         System.out.println("Send Email Successfully");
 

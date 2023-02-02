@@ -3,7 +3,7 @@
 //import com.google.firebase.auth.FirebaseAuthException;
 //import com.google.firebase.messaging.*;
 //import lombok.RequiredArgsConstructor;
-//import net.guides.springboot.notificationsystem.model.Notif;
+//import net.guides.springboot.notificationsystem.entity.Notif;
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.stereotype.Service;
 //

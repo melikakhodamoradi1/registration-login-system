@@ -1,6 +1,8 @@
-package net.guides.springboot.notificationsystem.model;
+package net.guides.springboot.notificationsystem.entity;
 import lombok.*;
 import net.guides.springboot.notificationsystem.entity.User;
+import net.guides.springboot.notificationsystem.model.NotificationType;
+import net.guides.springboot.notificationsystem.model.Status;
 
 import javax.persistence.*;
 import java.util.*;

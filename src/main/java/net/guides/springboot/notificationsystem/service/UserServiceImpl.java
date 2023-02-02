@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository.findByName("ROLE_USER");
         if (role == null) {
             role = checkRoleExist();
+            user.setGrade(Grade.PROFESSOR);
         }
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);

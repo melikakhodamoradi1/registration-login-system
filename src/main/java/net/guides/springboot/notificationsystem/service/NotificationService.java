@@ -1,7 +1,7 @@
 package net.guides.springboot.notificationsystem.service;
 
 
-import net.guides.springboot.notificationsystem.model.Notif;
+import net.guides.springboot.notificationsystem.entity.Notif;
 import net.guides.springboot.notificationsystem.service.model.EmailModel;
 import net.guides.springboot.notificationsystem.service.model.NotifModel;
 import org.springframework.web.multipart.MultipartFile;

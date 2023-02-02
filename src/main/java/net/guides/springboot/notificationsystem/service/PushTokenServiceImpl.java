@@ -2,6 +2,7 @@ package net.guides.springboot.notificationsystem.service;
 
 import com.vasl.ario.crudutil.service.SimpleCRUDService;
 import net.guides.springboot.notificationsystem.adapter.mapper.PushTokenServiceMapper;
+import net.guides.springboot.notificationsystem.entity.Notif;
 import net.guides.springboot.notificationsystem.model.*;
 //import net.guides.springboot.notificationsystem.repository.NotificationRepository;
 import net.guides.springboot.notificationsystem.repository.PushTokenRepository;

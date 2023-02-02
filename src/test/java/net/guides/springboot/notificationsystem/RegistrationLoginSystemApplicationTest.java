@@ -1,20 +1,17 @@
 package net.guides.springboot.notificationsystem;
 
-import net.guides.springboot.notificationsystem.entity.Role;
 import net.guides.springboot.notificationsystem.entity.User;
-import net.guides.springboot.notificationsystem.model.Notif;
+import net.guides.springboot.notificationsystem.entity.Notif;
 import net.guides.springboot.notificationsystem.repository.NotificationRepository;
 import net.guides.springboot.notificationsystem.repository.UserRepository;
 import net.guides.springboot.notificationsystem.service.model.Grade;
 import net.guides.springboot.notificationsystem.util.CalendarTool;
-import org.aspectj.weaver.ast.Not;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @SpringBootTest

@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.guides.springboot.notificationsystem.model.Notif;
 import net.guides.springboot.notificationsystem.service.model.Grade;
-import org.aspectj.weaver.ast.Not;
 
 import javax.persistence.*;
 import java.util.ArrayList;
