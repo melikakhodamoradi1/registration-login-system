@@ -4,7 +4,7 @@ public enum Grade {
 
     UNDER_GRADUATE("دانشجوی کارشناسی") , GRADUATE("دانشجوی کارشناسی ارشد") , PROFESSOR ( "اُستاد") ,
     DOCTORAL_STUDENT ("دانشجوی دکتری") , ALUMNUS ("دانشجوی فارغ التحصیل") ,
-    FACULTY_MEMBER ("عضو هیئت علمی دانشکده") , OTHER ( "غیر") , ALL ("همه");
+    FACULTY_MEMBER ("عضو هیئت علمی دانشکده") , OTHER ( "سایر") , ALL ("همه");
 
     private final String value;
     Grade(String value) {
